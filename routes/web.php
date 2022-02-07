@@ -6,6 +6,7 @@ use App\Http\Controllers\SessionController;
 use App\Http\Controllers\PostCommentsController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\AdminPostController;
+use App\Http\Controllers\ImageController;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
@@ -38,7 +39,7 @@ Route::get('/', [PostController::class, 'index'])->name('home'); //using PostCon
 //     ]);
 // });//->where('post', '[A-z_\-]+'); //find one or more uppercase letters (post = wildcard)
 
-Route::get('posts/{post:slug}', [PostController::class, 'show']);
+Route::get('posts/{post:slug}', [PostController::class, 'show'])->name('posts.show');
 
 // Route::get('categories/{category:slug}', function (Category $category) {
 //     return view('posts', [
@@ -71,3 +72,5 @@ Route::post('newsletter', NewsletterController::class);
 Route::middleware('can:admin')->group(function () {
     Route::resource('admin/posts', AdminPostController::class)->except('show');
 });
+
+Route::get('storage/app/', [ImageController::class, 'show'])->name('display');

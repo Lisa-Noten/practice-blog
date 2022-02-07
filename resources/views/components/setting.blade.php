@@ -7,7 +7,7 @@
     <div class="flex">
         <aside class="w-48">
             <h4 class="font-semibold mb-4">Links</h4>
-            <ul>                
+            <ul>
                 <li>
                     <a href="/admin/posts" class="{{ request()->is('admin/posts') ? 'text-blue-500' : ''}}">All Posts</a>
                 </li>

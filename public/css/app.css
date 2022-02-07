@@ -1,0 +1,11 @@
+.postImage {
+  transition: transform 0.4s;
+  width: 100%;
+  height: 300px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.postImage:hover {
+  transform: scale(1.1);
+}

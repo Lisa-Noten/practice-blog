@@ -12,7 +12,10 @@ use Illuminate\Support\Facades\Gate;
 class PostController extends Controller
 {
     public function index()
-    {   
+    {
+//        dd(route('posts.index',[
+//            'category' => 'test'
+//        ]));
         return view('posts.index', [
             'posts' => Post::latest()->filter(request(['search', 'category', 'author']) //Changes multiple queries to one
             )->paginate(3)->withQueryString() //with querystring to add search query to pagination
@@ -30,6 +33,6 @@ class PostController extends Controller
     protected function getPosts()
     {
         return Post::latest()->filter()->get();
-            
+
     }
 }

@@ -29,13 +29,13 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Model::unguard(); //prevents you from manually adding guard in models
-        
+
         Gate::define('admin', function (User $user) {
             return $user->username = 'test';
         });
 
         Blade::if('admin', function () {
-            return request()->user()?->can('admin');
+            return request()->user()->can('admin');
         });
     }
 }
