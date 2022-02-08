@@ -49,10 +49,7 @@ class Post extends Model
         return $this->belongsTo(User::class, 'user_id'); //Post belongs to a user
     }
 
-//    public function getThumbnail()
-//    {
-//        if (! $this->attributes[''])
-//    }
+
 }
 
 

@@ -18,7 +18,7 @@
 
                 <div class="mt-4">
                     <h1 class="text-3xl">
-                        <a href="{{ route('posts.show',$post->slug) }}">
+                        <a href="{{ route('posts.fetch',$post->slug) }}">
                             {{ $post->title }}
                         </a>
                     </h1>
@@ -40,14 +40,14 @@
                     <img src="/images/lary-avatar.svg" alt="Lary avatar">
                     <div class="ml-3">
                         <h5 class="font-bold">
-                            <a href="{{ route('posts.show',$post->author->username) }}">{{ $post->author->name }}</a>
+                            <a href="{{ route('posts.fetch',$post->author->username) }}">{{ $post->author->name }}</a>
                         </h5>
                         <h6>Mascot at Laracasts</h6>
                     </div>
                 </div>
 
                 <div>
-                    <a href="{{ route('posts.show',$post->slug) }}"
+                    <a href="{{ route('posts.fetch',$post->slug) }}"
                         class="transition-colors duration-300 text-xs font-semibold bg-gray-200 hover:bg-gray-300 rounded-full py-2 px-8">Read
                         More</a>
                 </div>

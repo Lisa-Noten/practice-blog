@@ -91,4 +91,5 @@
         </footer>
     </section>
     <x-flash/>
+    <script src="{{ mix("/js/app.js") }}"></script>
 </body>

@@ -19,7 +19,7 @@
 
                 <div class="mt-4">
                     <h1 class="text-3xl">
-                        <a href="{{ route('posts.show',$post->slug) }}">
+                        <a href="{{ route('posts.fetch',$post->slug) }}">
                             {{ $post->title }}
                         </a>
                     </h1>
@@ -48,7 +48,7 @@
                 </div>
 
                 <div class="hidden lg:block">
-                    <a href="{{ route('posts.show',$post->slug) }}"
+                    <a href="{{ route('posts.fetch',$post->slug) }}"
                         class="transition-colors duration-300 text-xs font-semibold bg-gray-200 hover:bg-gray-300 rounded-full py-2 px-8">Read
                         More</a>
                 </div>

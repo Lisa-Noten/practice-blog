@@ -30,6 +30,8 @@ use \Illuminate\Validation\ValidationException;
 
 Route::get('/', [PostController::class, 'index'])->name('home'); //using PostController to make things cleaner
 
+Route::get('posts/fetch', [PostController::class, 'fetch'])->name('posts.fetch');
+
 // Route::get('posts/{post}', function ($id) { //post wrapped in {braces} is a wildcard
 
 //     //Find a post by its slug and pass it to a view called "post"
@@ -39,7 +41,7 @@ Route::get('/', [PostController::class, 'index'])->name('home'); //using PostCon
 //     ]);
 // });//->where('post', '[A-z_\-]+'); //find one or more uppercase letters (post = wildcard)
 
-Route::get('posts/{post:slug}', [PostController::class, 'show'])->name('posts.show');
+//Route::get('posts/{post:slug}', [PostController::class, 'show'])->name('posts.show');
 
 // Route::get('categories/{category:slug}', function (Category $category) {
 //     return view('posts', [
