@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RegisterRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Controllers\Rule;
@@ -13,17 +14,12 @@ class RegisterController extends Controller
         return view('register.create');
     }
 
-    public function store()
+    public function store(RegisterRequest $request)
     {
-        $attributes = request()->validate([
-            'name' => 'required|max:255',
-            'username' => 'required|min:3|max:255|unique:users,username',
-            'email' => 'required|email|max:255|unique:users,email',
-            'password' => 'required|min:7|max:255',
-        ]); //laravel automaticly detects validation. If its not valid it will redirect to the same page
+        $validated = $request->validated();
 
-        auth()->login(User::create($attributes));
+        auth()->login(User::create($validated));
 
-        return redirect('/')->with('success', 'Your account has been created.'); //flash message 
+        return redirect('/')->with('success', 'Your account has been created.'); //flash message
     }
 }

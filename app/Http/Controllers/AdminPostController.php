@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AdminStoreRequest;
+use App\Http\Requests\AdminUpdateRequest;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Models\Post;
@@ -23,20 +25,14 @@ class AdminPostController extends Controller
         return view('posts.create');
     }
 
-    public function store()
+    public function store(AdminStoreRequest $request)
     {
-        $attributes = request()->validate([
-            'title' => 'required',
-            'thumbnail' => 'required|image',
-            'slug' => ['required', Rule::unique('posts', 'slug')],
-            'excerpt' => 'required',
-            'body' => 'required',
-            'category_id' => ['required', Rule::exists('categories', 'id')]
-        ]);
+        $validated = $request->validated();
 
-        $attributes['user_id'] = auth()->id();
-        $attributes['thumbnail'] = request()->file('thumbnail')->store('thumbnails');
-        Post::create($attributes);
+        $validated['user_id'] = auth()->id();
+        $validated['thumbnail'] = request()->file('thumbnail')->store('thumbnails');
+
+        Post::create($validated);
 
         return redirect('/');
     }
@@ -46,22 +42,15 @@ class AdminPostController extends Controller
         return view('admin.posts.edit', ['post' => $post]);
     }
 
-    public function update(Post $post)
+    public function update(AdminUpdateRequest $request)
     {
-        $attributes = request()->validate([
-            'title' => 'required',
-            'thumbnail' => 'image',
-            'slug' => ['required', Rule::unique('posts', 'slug')->ignore($post->id)],
-            'excerpt' => 'required',
-            'body' => 'required',
-            'category_id' => ['required', Rule::exists('categories', 'id')]
-        ]);
+        $validated = $request->validated();
 
-        if (isset($attributes['thumbnail'])) {
-            $attributes['thumbnail'] = request()->file('thumbnail')->store('thumbnails');
+        if (isset($validated['thumbnail'])) {
+            $validated['thumbnail'] = request()->file('thumbnail')->store('thumbnails');
         }
 
-        $post->update($attributes);
+        $post->update($validated);
 
         return back()->with('success', 'Post Updated!');
     }
@@ -69,7 +58,7 @@ class AdminPostController extends Controller
     public function destroy(Post $post)
     {
         $post->delete();
-        
+
         return back()->with('success', 'Post deleted!');
-    }    
+    }
 }

@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\Category;
-// use vendor\symfony\http-foundation\Response;
+//use vendor\symfony\http-foundation\Response;
 use App\Http\Middleware\MustBeAdministrator;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Gate;
+use Symfony\Component\HttpFoundation\Response;
 
 class PostController extends Controller
 {
@@ -35,4 +36,15 @@ class PostController extends Controller
         return Post::latest()->filter()->get();
 
     }
+
+    public function fetch()
+    {
+//        $posts = Post::get();
+        return response()->json([
+            'posts' => Post::latest()->get()
+        ], Response::HTTP_OK);
+
+    }
 }
+
+
